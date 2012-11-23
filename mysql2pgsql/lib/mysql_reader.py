@@ -93,7 +93,7 @@ class MysqlReader(object):
             elif data_type.startswith('char'):
                 return 'char'
             elif data_type in ('bit(1)', 'tinyint(1)', 'tinyint(1) unsigned'):
-                return 'boolean'
+                return 'tinyint'
             elif re.search(r'^smallint.* unsigned', data_type) or data_type.startswith('mediumint'):
                 return 'integer'
             elif data_type.startswith('smallint'):
