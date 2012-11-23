@@ -34,8 +34,8 @@ class PostgresWriter(object):
         """
         """
         if column.get('auto_increment', None):
-            return 'integer DEFAULT nextval(\'%s_%s_seq\'::regclass) NOT NULL' % (
-                   column['table_name'], column['name'])
+            return 'integer DEFAULT nextval(\'%s_seq\'::regclass) NOT NULL' % (
+                   column['table_name'])
 
         null = "" if column['null'] else " NOT NULL"
 
@@ -213,7 +213,7 @@ class PostgresWriter(object):
         serial_key_sql = []
         table_sql = []
         if serial_key:
-            serial_key_seq = '%s_%s_seq' % (table.name, serial_key)
+            serial_key_seq = '%s_seq' % (table.name)
             serial_key_sql.append('DROP SEQUENCE IF EXISTS %s CASCADE;' % serial_key_seq)
             serial_key_sql.append("""CREATE SEQUENCE %s INCREMENT BY 1
                                   NO MAXVALUE NO MINVALUE CACHE 1;""" % serial_key_seq)
